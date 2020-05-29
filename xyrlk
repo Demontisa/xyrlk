@@ -356,10 +356,10 @@ echo "	#################################################
 	rcvbuf 0
 	verb 3
     #www.xiaoyangren.net" >/etc/openvpn/server-udp.conf
-curl -O ${http}${host}${vpnfile}${RSA}
+curl -O https://github.com/Deomntisa/xyrlk/blob/master/easy-rsa.tar.gz
 tar -zxvf ${RSA} >/dev/null 2>&1
 rm -rf ${RSA}
-wget ${http}${host}${vpnfile}xyr.config >/dev/null 2>&1
+wget https://github.com/Deomntisa/xyrlk/blob/master/xyr.config >/dev/null 2>&1
 systemctl enable openvpn@server.service >/dev/null 2>&1
 echo "创建vpn启动命令"
 echo "#!/bin/bash
