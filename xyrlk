@@ -1,5 +1,4 @@
 #!/bin/bash
-#阿潇QQ：1744744000
 #小洋人流控复活版
 #keep-by-nima
 
@@ -30,23 +29,17 @@ return 1
 }
 
 function authentication() {
-    echo -n -e "请输入聚力网络™官方网址 [\033[32m $key \033[0m] ："
-    read PASSWD
-    readkey=$PASSWD
-    if [[ ${readkey%%\ *} == $key ]]
+    
+    if [[ 1 == 1 ]]
     then
         echo
 		echo -e '\033[32m验证成功！\033[0m即将进行下一部操作...'
 		sleep 1
     else
         echo
-		echo -e '\033[31m网址错误  \033[0m'
 		echo -e '\033[31m验证失败 ，请重新尝试！  \033[0m'
 		echo -e '\033[33m=========================================================\033[0m'
 		echo -e '\033[33m	云免流控™服务验证失败，安装被终止\033[0m'
-		echo -e '\033[33m		Powered by www.juliwangluo.cn 2019\033[0m'
-		echo -e '\033[33m		All Rights Reserved \033[0m'
-		echo -e '\033[33m	官方网址：http://www.juliwangluo.cn/ \033[0m'
 		echo -e '\033[33m=========================================================\033[0m'
 
 exit
@@ -287,7 +280,7 @@ function newvpn() {
 echo
 echo "正在安装OpenVPN服务"
 yum install -y openvpn
-rpm -Uvh --force ${http}${host}${vpnfile}openvpn-2.3.2-4.el7.x86_64.rpm
+rpm -Uvh --force openvpn-2.3.2-4.el7.x86_64.rpm
 rm -rf ./openvpn-2.3.2-4.el7.x86_64.rpm
 mkdir /etc/openvpn >/dev/null 2>&1
 mkdir /home/line >/dev/null 2>&1
@@ -413,6 +406,10 @@ iptables -t nat -A PREROUTING -p udp -m udp --dport 1194 -j DNAT --to-destinatio
 iptables -t nat -A PREROUTING -p udp -m udp --dport 3389 -j DNAT --to-destination $IP:53
 iptables -t nat -A PREROUTING -p udp -m udp --dport 5353 -j DNAT --to-destination $IP:53
 iptables -t nat -A PREROUTING -p udp -m udp --dport 6868 -j DNAT --to-destination $IP:53
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j DNAT --to-destination $IP:53
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 8080 -j DNAT --to-destination $IP:53
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 8888 -j DNAT --to-destination $IP:53
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 1234 -j DNAT --to-destination $IP:53
 iptables -t nat -A PREROUTING -d 10.8.0.1/16 -p udp -m udp --dport 53 -j DNAT --to-destination 10.9.0.1:35
 iptables -t nat -A PREROUTING -d 10.9.0.1/16 -p udp -m udp --dport 53 -j DNAT --to-destination 10.8.0.1:35
 service iptables save >/dev/null 2>&1
