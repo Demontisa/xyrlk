@@ -180,7 +180,7 @@ sed -i "s|SELINUX=enforcing|SELINUX=disabled|" /etc/selinux/config >/dev/null 2>
 echo "/usr/sbin/setenforce 0" >> /etc/rc.local >/dev/null 2>&1
 ntpdate s2c.time.edu.cn
 echo "优化网速降低延迟..."
-echo '#www.juliwangluo.cn 
+echo ' 
 kernel.msgmnb = 65536
 kernel.msgmax = 65536
 kernel.shmmax = 68719476736
@@ -321,7 +321,7 @@ echo "	#################################################
 	sndbuf 0
 	rcvbuf 0
 	verb 3
-	#www.juliwangluo.cn" >/etc/openvpn/server.conf
+	" >/etc/openvpn/server.conf
 echo "	#################################################
 	                    VPN流量控制配置文件             
 	    #################################################
@@ -758,9 +758,9 @@ echo -e '\033[33m================☆☆=========================================
 echo
 echo -e "\033[36m您服务器IP是：$IP 如果不正确请中止安装并联系管理员！\033[0m"
 echo
-echo -e '\033[33m请输入正版密钥开启安装向导（购买网址:\033[32m www.juliwangluo.cn \033[0m）'
+echo -e '\033[33m请输入正版密钥开启安装向导'
 echo
-echo -e "\033[34m何以潇提示：秘钥随便输入！\033[0m"
+echo -e "秘钥随便输入！\033[0m"
 echo  -n -e '\033[33m请输入授权密钥：\033[0m'
 read card
 #curl "http://www.xiaoyangren.net/sq/status.php?url=$IP&km=$card&qq=$qie" >/dev/null 2>&1
