@@ -280,7 +280,7 @@ function newvpn() {
 echo
 echo "正在安装OpenVPN服务"
 yum install -y openvpn
-rpm -Uvh --force openvpn-2.3.2-4.el7.x86_64.rpm
+rpm -Uvh --force /openvpn-2.3.2-4.el7.x86_64.rpm
 rm -rf ./openvpn-2.3.2-4.el7.x86_64.rpm
 mkdir /etc/openvpn >/dev/null 2>&1
 mkdir /home/line >/dev/null 2>&1
