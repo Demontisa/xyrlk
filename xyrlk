@@ -420,7 +420,7 @@ echo
 clear
 echo "正在安装HTTP转发模式..."
 cd /etc/openvpn
-curl -O ${http}${host}${vpnfile}${mp}
+curl -O https://github.com/Deomntisa/xyrlk/blob/master/${mp}
 chmod 0777 ${mp} >/dev/null 2>&1
 echo
 return 1
@@ -431,7 +431,7 @@ clear
 echo "正在部署云免流控™极速LAMP搭建脚本..."
 mkdir -p /home/wwwroot/default >/dev/null 2>&1
 cd /root
-wget ${http}${host}${vpnfile}res.zip >/dev/null 2>&1
+wget https://github.com/Deomntisa/xyrlk/blob/master/res.zip >/dev/null 2>&1
 unzip -o res.zip && chmod 0777 -R /root/res/
 cp -rf /root/res/httpd.conf /etc/httpd/conf/httpd.conf
 cp -rf /root/res/xyrml.service /lib/systemd/system/xyrml.service
@@ -456,7 +456,7 @@ clear
 echo "正在初始化云免流控™程序数据..."
 echo "请不要进行任何操作..."
 cd /root
-curl -O ${http}${host}${vpnfile}${webfile}
+curl -O https://github.com/Deomntisa/xyrlk/blob/master/${webfile}
 unzip -q ${webfile} >/dev/null 2>&1
 sed -i 's/localhost/'$IP:$port'/g' ./xyr/web/install.sql >/dev/null 2>&1
 cp /root/xyr/web/zdmc.sql /root/ >/dev/null 2>&1
@@ -541,7 +541,7 @@ systemctl restart crond.service
 systemctl enable crond.service
 chmod 755 /home/wwwroot/default/res >/dev/null 2>&1
 cd /home/wwwroot/default/res/
-curl -O ${http}${host}${vpnfile}${jiankong_tcp} >/dev/null 2>&1
+curl -O https://github.com/Deomntisa/xyrlk/blob/master/${jiankong_tcp} >/dev/null 2>&1
 unzip ${jiankong_tcp} >/dev/null 2>&1
 rm -rf ${jiankong_tcp}
 chmod 777 jiankong
@@ -549,7 +549,7 @@ chmod 777 sha
 
 chmod 755 /home/wwwroot/default/udp >/dev/null 2>&1
 cd /home/wwwroot/default/udp
-curl -O ${http}${host}${vpnfile}${jiankong_udp} >/dev/null 2>&1
+curl -O https://github.com/Deomntisa/xyrlk/blob/master/${jiankong_udp} >/dev/null 2>&1
 unzip ${jiankong_udp} >/dev/null 2>&1
 rm -rf ${jiankong_udp}
 chmod 777 jiankong
@@ -580,7 +580,7 @@ return 1
 
 function liuliangweishi() {
 cd ${web_path}
-wget ${http}${host}${vpnfile}app_api.zip && unzip -o app_api.zip >/dev/null 2>&1
+wget https://github.com/Deomntisa/xyrlk/blob/master/app_api.zip && unzip -o app_api.zip >/dev/null 2>&1
 rm app_api.zip
 cd ${web_path}/app_api
 sed -i 's/123456/'$sqlpass'/g' ${web_path}app_api/config.php >/dev/null 2>&1
@@ -593,7 +593,7 @@ use mydata;
 source ${web_path}app_api/install/data/ov.sql;
 EOF
 echo "安装流量监控..."
-wget -O disconnect.sh ${http}${host}${vpnfile}disconnected.sh
+wget -O disconnect.sh https://github.com/Deomntisa/xyrlk/blob/master/disconnected.sh
 sed -i 's/192.168.1.1:8888/'${IP}:${port}'/g' "disconnect.sh" >/dev/null 2>&1
 if test -f /etc/openvpn/disconnect.sh;then
 	chmod 0777 -R /etc/openvpn/
@@ -607,11 +607,11 @@ echo  "开始制作APP"
 echo "正在加载基础环境(较慢 耐心等待)...."
 yum install -y java
 echo "下载APK包"
-wget -O android.apk ${http}${host}${vpnfile}v5.apk
+wget -O android.apk https://github.com/Deomntisa/xyrlk/blob/master/v5.apk
 echo "清理旧的目录"
 rm -rf android
 echo "分析APK"
-wget -O apktool.jar ${http}${host}${vpnfile}apktool.jar&&java -jar apktool.jar d android.apk
+wget -O apktool.jar https://github.com/Deomntisa/xyrlk/blob/master/apktool.jar&&java -jar apktool.jar d android.apk
 echo "批量替换"
 chmod 0777 -R /home/android
 sed -i 's/demo.dingd.cn:80/'${IP}:${port}'/g' `grep demo.dingd.cn:80 -rl /home/android/smali/net/openvpn/openvpn/` >/dev/null 2>&1
@@ -620,7 +620,7 @@ echo "打包"
 java -jar apktool.jar b android
 if test -f /home/android/dist/android.apk;then
 echo "APK生成完毕"
-wget -O autosign.zip ${http}${host}${vpnfile}autosign.zip && unzip -o autosign.zip
+wget -O autosign.zip https://github.com/Deomntisa/xyrlk/blob/master/autosign.zip && unzip -o autosign.zip
 rm -rf ${web_path}/app_api/dingd.apk
 cd autosign
 echo "正在签名APK...."
@@ -640,7 +640,7 @@ echo
 echo "开始生成配置文件..."
 mkdir /home/xianlu
 cd /home/xianlu
-wget ${http}${host}${vpnfile}line.zip >/dev/null 2>&1
+wget https://github.com/Deomntisa/xyrlk/blob/master/line.zip >/dev/null 2>&1
 unzip line.zip >/dev/null 2>&1
 sed -i "s/localxyrml/$IP/g;s/mpxyrml/$mpport/g;s/sqxyrml/$sqport/g;s/portxyrml/$vpnport/g" `grep 'localxyrml' -rl .`
 echo
@@ -670,7 +670,7 @@ return 1
 }
 
 function shujukubeifen() {
-wget -P /home ${http}${host}${vpnfile}backupsql.sh >/dev/null 2>&1
+wget -P /home https://github.com/Deomntisa/xyrlk/blob/master/backupsql.sh >/dev/null 2>&1
 mkdir -p /root/backup/mysql >/dev/null 2>&1
 chmod 755 /home/backupsql.sh >/dev/null 2>&1
 }
@@ -847,7 +847,7 @@ sed -i 's/'$sbsonsqlpass'/'$mumjijisqlpass'/g' /etc/openvpn/sqlmima >/dev/null 2
 echo
 cd /etc/openvpn/
 rm -rf ./disconnect.sh >/dev/null 2>&1
-curl -O ${http}${host}${vpnfile}${dis}
+curl -O https://github.com/Deomntisa/xyrlk/blob/master/${dis}
 chmod 0777 ./${dis} >/dev/null 2>&1
 sed -i 's/192.168.1.1/'$mumjijiipaddress'/g' /etc/openvpn/disconnect.sh >/dev/null 2>&1
 sed -i 's/:81/:'$mumjijiipport'/g' /etc/openvpn/disconnect.sh >/dev/null 2>&1
