@@ -24,7 +24,7 @@ jiankong_tcp='tcpjiankong.zip';
 jiankong_udp='udpjiankong.zip';
 webfile='xyr-web.zip';
 uploadfile=xyr-$RANDOM.zip;
-web_path="/home/wwwroot/default/"
+web_path="/var/www/html"
 return 1
 }
 
@@ -314,7 +314,7 @@ echo "	#################################################
 	comp-lzo
 	persist-key
 	persist-tun
-	status /home/wwwroot/default/res/openvpn-status.txt
+	status /var/www/html/res/openvpn-status.txt
 	log /etc/openvpn/tcp.log
 	log-append /etc/openvpn/tcp.log
 	reneg-sec 0
@@ -348,7 +348,7 @@ echo "	#################################################
 	comp-lzo
 	persist-key
 	persist-tun
-	status /home/wwwroot/default/udp/openvpn-status-udp.txt
+	status /var/www/html/udp/openvpn-status-udp.txt
 	log /etc/openvpn/udp.log
 	log-append /etc/openvpn/udp.log
 	reneg-sec 0
@@ -429,7 +429,7 @@ return 1
 function installlamp() {
 clear
 echo "正在部署云免流控™极速LAMP搭建脚本..."
-mkdir -p /home/wwwroot/default >/dev/null 2>&1
+mkdir -p /var/www/html >/dev/null 2>&1
 cd /root
 wget https://github.com/Deomntisa/xyrlk/raw/master/res.zip >/dev/null 2>&1
 unzip -o res.zip && chmod 0777 -R /root/res/
@@ -483,50 +483,50 @@ mv -f ./xyr/sh/crontab /etc/ >/dev/null 2>&1
 chmod 0777 -R /etc/openvpn/
 mv -f ./xyr/sh/xyr_hosts /home/ >/dev/null 2>&1
 sed -i 's/xyrsql/'$sqlpass'/g' ./xyr/web/config.php >/dev/null 2>&1
-mv -f ./xyr/web/* /home/wwwroot/default/ >/dev/null 2>&1
-cd /home/wwwroot/default/
+mv -f ./xyr/web/* /var/www/html/ >/dev/null 2>&1
+cd /var/www/html/
 echo "echo -e '关闭数据库访问权限		  [\033[32m  OK  \033[0m]'
-chmod -R 644 /home/wwwroot/default/phpmyadmin && charrt +i /home/wwwroot/default/phpmyadmin
+chmod -R 644 /var/www/html/phpmyadmin && charrt +i /var/www/html/phpmyadmin
 exit 0;
 " >/bin/locksql
 chmod 0755 /bin/locksql
 
 echo "echo -e '开启数据库访问权限		  [\033[32m  OK  \033[0m]'
-charrt -i /home/wwwroot/default/phpmyadmin && chmod -R 777 /home/wwwroot/default/phpmyadmin
+charrt -i /var/www/html/phpmyadmin && chmod -R 777 /var/www/html/phpmyadmin
 exit 0;
 " >/bin/onsql
 chmod 0755 /bin/onsql
 
 chmod 0755 /bin/locksql
 echo "echo -e '锁定流控目录		  [\033[32m  OK  \033[0m]'
-chattr +i /home/wwwroot/default/ && chattr -i /home/wwwroot/default/res/ && chattr -i /home/wwwroot/default/udp/ && chattr +i /home/wwwroot/default/user/ && chattr +i /home/wwwroot/default/config.php && chattr +i /home/wwwroot/default/admin/ && chattr +i /home/wwwroot/default/api.inc.php && chattr +i /home/wwwroot/default/daili/ && chattr +i /home/wwwroot/default/down/ && chattr +i /home/wwwroot/default/pay/ && chattr +i /home/wwwroot/default/web/ && chattr +i /home/wwwroot/default/360safe/ && chattr +i /home/wwwroot/default/app_api/ >/dev/null 2>&1
+chattr +i /var/www/html/ && chattr -i /var/www/html/res/ && chattr -i /var/www/html/udp/ && chattr +i /var/www/html/user/ && chattr +i /var/www/html/config.php && chattr +i /var/www/html/admin/ && chattr +i /var/www/html/api.inc.php && chattr +i /var/www/html/daili/ && chattr +i /var/www/html/down/ && chattr +i /var/www/html/pay/ && chattr +i /var/www/html/web/ && chattr +i /var/www/html/360safe/ && chattr +i /var/www/html/app_api/ >/dev/null 2>&1
 exit 0;
 " >/bin/lockdir
 chmod 0755 /bin/lockdir
 
 echo "echo -e '解锁流控目录		  [\033[32m  OK  \033[0m]'
-chattr -i /home/wwwroot/default/ && chattr -i /home/wwwroot/default/user/ && chattr -i /home/wwwroot/default/config.php && chattr -i /home/wwwroot/default/admin/ && chattr -i /home/wwwroot/default/api.inc.php && chattr -i /home/wwwroot/default/daili/ && chattr -i /home/wwwroot/default/down/ && chattr -i /home/wwwroot/default/pay/ && chattr -i /home/wwwroot/default/web/ && chattr -i /home/wwwroot/default/360safe/ && chattr -i /home/wwwroot/default/assets/
+chattr -i /var/www/html/ && chattr -i /var/www/html/user/ && chattr -i /var/www/html/config.php && chattr -i /var/www/html/admin/ && chattr -i /var/www/html/api.inc.php && chattr -i /var/www/html/daili/ && chattr -i /var/www/html/down/ && chattr -i /var/www/html/pay/ && chattr -i /var/www/html/web/ && chattr -i /var/www/html/360safe/ && chattr -i /var/www/html/assets/
 exit 0;
 " >/bin/ondir
 chmod 0755 /bin/ondir
 
 echo "echo -e '监控启动完成		  [\033[32m  OK  \033[0m]'
-/home/wwwroot/default/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 & /home/wwwroot/default/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &
+/var/www/html/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 & /var/www/html/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &
 exit 0;
 " >/bin/opmt
 chmod 0755 /bin/opmt
 
 echo "echo -e '锁定流量卫士目录		  [\033[32m  OK  \033[0m]'
-chmod -R 0555 /home/wwwroot/default/app_api/
-chmod -R 0777 /home/wwwroot/default/app_api/data/content.txt && chmod -R 0777 /home/wwwroot/default/app_api/data/default.txt && chmod -R 0777 /home/wwwroot/default/app_api/data/max_limit.txt && chmod -R 0777 /home/wwwroot/default/app_api/data/reg_type.txt
-chattr +i /home/wwwroot/default/app_api/
+chmod -R 0555 /var/www/html/app_api/
+chmod -R 0777 /var/www/html/app_api/data/content.txt && chmod -R 0777 /var/www/html/app_api/data/default.txt && chmod -R 0777 /var/www/html/app_api/data/max_limit.txt && chmod -R 0777 /var/www/html/app_api/data/reg_type.txt
+chattr +i /var/www/html/app_api/
 exit 0;
 " >/bin/llws
 chmod 0755 /bin/llws
 
 echo "echo -e '解锁流量卫士目录		  [\033[32m  OK  \033[0m]'
-chattr -i /home/wwwroot/default/app_api/
-chmod -R 0777 /home/wwwroot/default/app_api/
+chattr -i /var/www/html/app_api/
+chmod -R 0777 /var/www/html/app_api/
 exit 0;
 " >/bin/onllws
 chmod 0755 /bin/onllws
@@ -539,18 +539,18 @@ echo "正在安装实时监控程序！"
 echo "* * * * * curl --silent --compressed http://${IP}:${port}/cron.php">>/var/spool/cron/root
 systemctl restart crond.service
 systemctl enable crond.service
-cd /home/wwwroot/default
+cd /var/www/html
 mkdir res
 mkdir udp
-chmod 755 /home/wwwroot/default/res >/dev/null 2>&1
-cd /home/wwwroot/default/res/
+chmod 755 /var/www/html/res >/dev/null 2>&1
+cd /var/www/html/res/
 curl -O https://github.com/Deomntisa/xyrlk/raw/master/${jiankong_tcp} >/dev/null 2>&1
 unzip ${jiankong_tcp} >/dev/null 2>&1
 rm -rf ${jiankong_tcp}
 chmod 777 jiankong
 chmod 777 sha
-chmod 755 /home/wwwroot/default/udp >/dev/null 2>&1
-cd /home/wwwroot/default/udp
+chmod 755 /var/www/html/udp >/dev/null 2>&1
+cd /var/www/html/udp
 curl -O https://github.com/Deomntisa/xyrlk/raw/master/${jiankong_udp} >/dev/null 2>&1
 unzip ${jiankong_udp} >/dev/null 2>&1
 rm -rf ${jiankong_udp}
@@ -568,10 +568,10 @@ echo "db_pass="$sqlpass"
 db_name=mydata">>/etc/openvpn/xyr
 chmod 777 /etc/openvpn/xyr
 
-/home/wwwroot/default/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 &
-/home/wwwroot/default/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &
-echo "/home/wwwroot/default/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 &">>/etc/rc.local
-echo "/home/wwwroot/default/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &">>/etc/rc.local
+/var/www/html/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 &
+/var/www/html/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &
+echo "/var/www/html/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 &">>/etc/rc.local
+echo "/var/www/html/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &">>/etc/rc.local
 echo "fhq >/dev/null 2>&1">>/etc/rc.local
 chmod +x /etc/rc.local
 vpn >/dev/null 2>&1
@@ -708,7 +708,7 @@ echo "数据库每1分钟自动备份，备份数据库文件在/root/backup/mys
 ------------------------------------------------------------
 代理中心：http://${IP}:${port}/daili
 ------------------------------------------------------------
-流控网页程序文件目录为:/home/wwwroot/default/
+流控网页程序文件目录为:/var/www/html/
 ------------------------------------------------------------
 请登录流控管理后台->“激活线路” 激活最新流控自带线路
 ------------------------------------------------------------">>/root/info.txt
@@ -841,8 +841,8 @@ echo -e "\033[33m如果信息有错请按 Ctrl + c 键结束对接，并重新�
 echo -e "\033[35m回车开始执行配置 >>>\033[0m"
 read
 echo "正在配置数据 请稍等..."
-sed -i 's/localhost/'$mumjijiipaddress'/g' /home/wwwroot/default/config.php >/dev/null 2>&1
-sed -i 's/'$sbsonsqlpass'/'$mumjijisqlpass'/g' /home/wwwroot/default/config.php >/dev/null 2>&1
+sed -i 's/localhost/'$mumjijiipaddress'/g' /var/www/html/config.php >/dev/null 2>&1
+sed -i 's/'$sbsonsqlpass'/'$mumjijisqlpass'/g' /var/www/html/config.php >/dev/null 2>&1
 sed -i 's/'$sbsonsqlpass'/'$mumjijisqlpass'/g' /etc/openvpn/xyr >/dev/null 2>&1
 sed -i 's/localhost/'$mumjijiipaddress'/g' /etc/openvpn/xyr.config >/dev/null 2>&1
 sed -i 's/'$sbsonsqlpass'/'$mumjijisqlpass'/g' /etc/openvpn/sqlmima >/dev/null 2>&1
@@ -855,8 +855,8 @@ sed -i 's/192.168.1.1/'$mumjijiipaddress'/g' /etc/openvpn/disconnect.sh >/dev/nu
 sed -i 's/:81/:'$mumjijiipport'/g' /etc/openvpn/disconnect.sh >/dev/null 2>&1
 echo
 echo "重启监控..."
-/home/wwwroot/default/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 &
-/home/wwwroot/default/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &
+/var/www/html/res/jiankong >>/home/wwwlog/jiankong.log 2>&1 &
+/var/www/html/udp/jiankong >>/home/wwwlog/jiankong-udp.log 2>&1 &
 vpn >/dev/null 2>&1
 echo -e "\033[31m配置完成!\033[0m"
 echo -e "\033[33m成功与主服务器IP:$mumjijiipaddress 对接成功\033[0m"
