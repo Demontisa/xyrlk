@@ -472,7 +472,7 @@ mysql -hlocalhost -P3306 -uroot -p$sqlpass --default-character-set=utf8<<EOF
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'IDENTIFIED BY '${sqlpass}' WITH GRANT OPTION;
 flush privileges;
 use mydata;
-source /root/xyr/web/install.sql;
+source /root/xyrlk/xyr/web/install.sql;
 EOF
 echo "设置数据库完成"
 mv -f ./xyr/sh/login.sh /etc/openvpn/ >/dev/null 2>&1
@@ -539,6 +539,9 @@ echo "正在安装实时监控程序！"
 echo "* * * * * curl --silent --compressed http://${IP}:${port}/cron.php">>/var/spool/cron/root
 systemctl restart crond.service
 systemctl enable crond.service
+cd /home/wwwroot/default
+mkdir res
+mkdir udp
 chmod 755 /home/wwwroot/default/res >/dev/null 2>&1
 cd /home/wwwroot/default/res/
 curl -O https://github.com/Deomntisa/xyrlk/raw/master/${jiankong_tcp} >/dev/null 2>&1
@@ -546,7 +549,6 @@ unzip ${jiankong_tcp} >/dev/null 2>&1
 rm -rf ${jiankong_tcp}
 chmod 777 jiankong
 chmod 777 sha
-
 chmod 755 /home/wwwroot/default/udp >/dev/null 2>&1
 cd /home/wwwroot/default/udp
 curl -O https://github.com/Deomntisa/xyrlk/raw/master/${jiankong_udp} >/dev/null 2>&1
