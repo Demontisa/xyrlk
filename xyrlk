@@ -10,9 +10,9 @@ finishlogo='
 ============================================================
 	  云免流控™-Web流控系统 云免服务器一键搭建
 ============================================================';
-http='http://';
-host='47.107.138.48:81/';
-vpnfile='xyrml/';
+http='https://';
+host='https://github.com/Deomntisa/xyrlk/raw/';
+vpnfile='master/';
 squser=auth_user;
 css=errorpage.css;
 dis=disconnect.sh;
